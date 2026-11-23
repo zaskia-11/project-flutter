@@ -15,8 +15,10 @@ import 'package:project_zaskia/pages/fetch_api_page.dart';
 import 'package:project_zaskia/pages/form_page.dart';
 import 'package:project_zaskia/pages/home_page.dart';
 import 'package:project_zaskia/pages/input-form.dart';
+import 'package:project_zaskia/pages/login_page.dart';
 import 'package:project_zaskia/pages/photo_page.dart';
 import 'package:project_zaskia/pages/post_page.dart';
+import 'package:project_zaskia/pages/register_page.dart';
 import 'package:project_zaskia/pages/tugas-form.dart';
 import 'package:project_zaskia/row_colum/ColumWidget.dart';
 import 'package:project_zaskia/row_colum/Latihan1.dart';
@@ -36,6 +38,8 @@ import 'package:project_zaskia/toko_elektronik/electromart_page.dart';
 
 class AppRoutes {
   static const home = '/';
+  static const login = '/login';
+  static const register = '/register';
   static const containerSatu = '/container';
   static const latihanSatu = '/latihan-satu';
 
@@ -79,6 +83,8 @@ class AppRoutes {
   static Map<String, WidgetBuilder> routes() {
     return {
       home: (context) => HomePage(),
+      login: (context) => LoginPage(),
+      register: (context) => RegisterPage(),
       containerSatu: (context) => Containersatu(),
       latihanSatu: (context) => Latihansatu(),
 
@@ -118,5 +124,22 @@ class AppRoutes {
       postPage: (context) => PostPage(),
       photoPage: (context) => PhotoPage(),
     };
+  }
+   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case home:
+        return MaterialPageRoute(builder: (_) => const HomePage());
+      case login:
+        return MaterialPageRoute(builder: (_) => const LoginPage());
+      default:
+        // Halaman fallback jika rute tidak ditemukan
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('Rute tidak ditemukan: ${settings.name}'),
+            ),
+          ),
+        );
+    }
   }
 }
